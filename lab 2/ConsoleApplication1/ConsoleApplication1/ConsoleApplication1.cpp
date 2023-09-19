@@ -2,137 +2,37 @@
 //
 
 #include <iostream>
+#include "uppgift1.h"
+#include "uppgift2.h"
+#include "uppgift3.h"
 
-// Uppgift 1
-int gcd(int nbrA, int nbrB)
-{
-	if (nbrA == 0) {
-		return nbrB;
-	}
-	return gcd(nbrB % nbrA, nbrA);
+void uppgift1Test() {
+	std::cout << "Uppgift 1" << "\n" << std::endl;
+	printPrimeNbrs(25);
+	std::cout << "\n" << std::endl;
 }
 
-bool isPrimeNbr(int* primesArray, int* primesArraySize, int nbrToCheck) {
-	int size = *primesArraySize;
-	bool isNotPrime = true;
-	for (int i = 0; i < size; i++) {
-		int prime = primesArray[i];
-		int result = gcd(prime, nbrToCheck);
-		isNotPrime = isNotPrime && result != 1;
-		if (isNotPrime) {
-			return false;
-		}
-	};
-
-	int newSize = size + 1;
-	int nextIndex = size;
-
-	primesArray[nextIndex] = nbrToCheck;
-	*primesArraySize = newSize;
-	return true;
+void uppgift2Test() {
+	std::cout << "Uppgift 2" << "\n" << std::endl;
+	std::string input = "Hej po dejje ej";
+	std::string toReplace = "ej";
+	std::string replacement = "ig";
+	substitute_str(input, toReplace, replacement);
+	std::cout << "result: " << input << std::endl;
+	std::cout << "\n" << std::endl;
 }
 
-void printPrimeNbrs(int n) {
-	int size = n - 2;
-	int* nbrs = new int[size] {};
-	for (int i = 0; i < size; i++) {
-		nbrs[i] = i + 2;
-	}
-	
-	int* primes = new int[size];
-	for (int i = 0; i < size; i++) {
-		primes[i] = -1;
-	}
-	primes[0] = 2;
-	int primesSize = 1;
-	
-
-	for (int i = 0; i < size; i++) {
-		int nbr = nbrs[i];
-		if (nbr == 2) {
-			std::cout << "prime: " << nbr << std::endl;
-			continue;
-		}
-		if (isPrimeNbr(primes, &primesSize, nbr)) {
-			std::cout << "prime: " << nbr << std::endl;
-		}
-	}
-	delete[] nbrs;
-	delete[] primes;
-}
-
-// Uppgift 2
-void substitute_str(
-	std::string& iostring,
-	const std::string& before,
-	const std::string& after
-) {
-	int i = 0;
-	while (true) {
-		int start = iostring.find(before, i);
-		if (start == -1) {
-			break;
-		}
-		iostring.replace(start, before.length(), after);
-		i = start + after.length();
-	}
-}
-
-// Uppgift 3
-int getLength(const char* input) {
-	int size = 0;
-
-	while(*input != '\0') {
-		size++;
-		input++;
-	}
-	return size;
-}
-
-int charOccurences(const char* input, const char before) {
-	int occurences = 0;
-	for (int i = 0; i < getLength(input); i++) {
-		char letter = input[i];
-		if (letter == before) {
-			occurences++;
-		}
- 	}
-	return occurences;
-}
-
-int getNewLength(const char* input, const char before, const char* after) {
-	int occurences = charOccurences(input, before);
-	int afterLength = getLength(after);
-	int inputLength = getLength(input);
-	return occurences * afterLength - occurences + inputLength;
-}
-
-char* getNewInitialCStr(const char* input, const char before, const char* after)   {
-	int newLength = getNewLength(input, before, after);
-	char* newCStr = new char[newLength] {};
-	for (int i = 0; i < newLength; i++) {
-		newCStr[i] = ' ';
-	}
-	newCStr[newLength] = '\0';
-	return newCStr;
-}
-
-char* substitute_cstr(const char* input, const char before, const char* after) {
-	char* newCStr = getNewInitialCStr(input, before, after);
-	while (*input != '\0') {
-		int isMatching = *input == before;
-		if (isMatching) {
-
-		}
-		input++;
-	}
-	return newCStr;
+void uppgift3Test() {
+	std::cout << "Uppgift 3" << "\n" << std::endl;
+	char* result = substitute_cstr("aabaa", 'a', " cac ");
+	std::cout << "result: " << result << std::endl;
+	std::cout << "\n" << std::endl;
 }
 
 int main()
 {
-	const char* input = "ab ab bb";
-	const char toReplace = 'b';
-	const char* replacement = "cc";
-	substitute_cstr(input, toReplace, replacement);
+	uppgift1Test();
+	uppgift2Test();
+	uppgift3Test();
 }
+
