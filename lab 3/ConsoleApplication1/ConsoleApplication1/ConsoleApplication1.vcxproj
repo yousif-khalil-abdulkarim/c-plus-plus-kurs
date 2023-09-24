@@ -21,10 +21,10 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{99b0c6be-1c27-4e7d-bcd8-d136f2a7123a}</ProjectGuid>
+    <ProjectGuid>{0305f9e4-6557-4926-8275-79184a48fd23}</ProjectGuid>
     <RootNamespace>ConsoleApplication1</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>Lab2</ProjectName>
+    <ProjectName>Lab3</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -128,19 +128,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Lab2.cpp" />
-    <ClCompile Include="uppgift1.cpp" />
-    <ClCompile Include="uppgift2.cpp" />
-    <ClCompile Include="uppgift3.cpp" />
+    <ClCompile Include="lab3.cpp" />
+    <ClCompile Include="PersonReg.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="uppgift1.h" />
-    <ClInclude Include="uppgift2.h" />
-    <ClInclude Include="uppgift3.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="ConsoleApplication1.rc" />
+    <ClInclude Include="PersonReg.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
