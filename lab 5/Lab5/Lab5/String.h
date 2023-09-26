@@ -5,10 +5,11 @@
 
 class String {
 	char* chars;
-	int growSize;
 	int _size;
 	int _capacity;
+	static const int growSize;
 	static int calcCapacity(int size, int growSize);
+	static int cstrLength(const char* cstr);
 public:
 	~String();
 	String();
