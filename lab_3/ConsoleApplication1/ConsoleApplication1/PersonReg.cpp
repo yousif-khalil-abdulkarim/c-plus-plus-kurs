@@ -1,36 +1,33 @@
-//#include<string>
+#include<string>
 #include "PersonReg.h"
-//#include<iostream>
+#include<iostream>
 
 Person::Person() {
 	this->namn = "";
-	this->address = "";
-	std::cout << "Person default constroctur called" << std::endl;
+	this->adress = "";
+	// std::cout << "Person default constroctur called" << std::endl;
 }
 Person::Person(std::string namn, std::string address) {
 	this->namn = namn;
-	this->address = address;
-	std::cout << "Person input constructor called" << std::endl;
+	this->adress = address;
+	// std::cout << "Person input constructor called" << std::endl;
 }
 void Person::Print() {
 	std::cout << "namn: " << this->namn << std::endl;
-	std::cout << "address: " << this->address << std::endl;
-	std::cout << "test" << std::endl;
+	std::cout << "address: " << this->adress << std::endl;
 }
 
 PersonMedTel::PersonMedTel(): Person() {
 	this->nummer = "";
-	std::cout << "PersonMedTel default constroctur called" << std::endl;
+	// std::cout << "PersonMedTel default constroctur called" << std::endl;
 };
 PersonMedTel::PersonMedTel(std::string namn, std::string address, std::string nummer): Person(namn, address) {
 	this->nummer = nummer;
-	// this->namn = namn;
-	// this->address = address;
 	std::cout << "PersonMedTel input constructor called" << std::endl;
 };
 void PersonMedTel::Print() {
 	std::cout << "namn: " << this->namn << std::endl;
-	std::cout << "address: " << this->address << std::endl;
+	std::cout << "address: " << this->adress << std::endl;
 	std::cout << "nummer: " << this->nummer << std::endl;
 };
 
@@ -48,28 +45,31 @@ int PersonReg::Size() const {
 	}
 	return size;
 }
-bool PersonReg::HasPointer(Person* person) const {
+bool PersonReg::HasPerson(Person* person) const {
 	if (person == nullptr) {
 		return false;
 	}
 	for (const Person const* indexPointer = this->startPointer; indexPointer != this->currentPointer; ++indexPointer) {
 		if (indexPointer == person) {
 			return true;
-			break;
 		}
 	}
 	return false;
 };
 bool PersonReg::IsFull() const {
-	return this->Size() == this->Capacity();
+	return this->Size() == this->Capacity() - 1;
 }
 bool PersonReg::IsEmpty() const {
 	return this->Size() == 0;
 }
 PersonReg::PersonReg(int maxStorlek) {
-	this->currentPointer = new Person[maxStorlek + 1]();
-	this->startPointer = this->currentPointer;
-	this->endPointer = this->currentPointer + maxStorlek;
+	this->startPointer = new Person[maxStorlek + 1]();
+	this->currentPointer = this->startPointer;
+	this->endPointer = this->startPointer + maxStorlek;
+
+	for (Person* indexPointer = this->currentPointer; indexPointer != this->currentPointer + maxStorlek; indexPointer++) {
+		indexPointer->Print();
+	}
 };
 PersonReg::~PersonReg() {
 	delete[] this->startPointer;
@@ -87,7 +87,7 @@ bool PersonReg::LäggTillTest(const std::string& namn, const std::string& adress)
 	return this->LäggTill(&person);
 };
 void PersonReg::TaBortEntry(Person* ptr) {
-	if (!this->HasPointer(ptr)) {
+	if (!this->HasPerson(ptr)) {
 		return;
 	}
 	for (Person* indexPointer = ptr; indexPointer != this->currentPointer - 1; ++indexPointer) {
@@ -106,11 +106,11 @@ Person* PersonReg::SökNamn(const std::string& namn) const {
 };
 Person* PersonReg::SökFritt(const std::string& sökEfter, Person* startOnNext) const {
 	Person* startIndexPointer = this->startPointer;
-	if (this->HasPointer(startPointer)) {
-		startIndexPointer = startOnNext;
+	if (this->HasPerson(startOnNext)) {
+		startIndexPointer = startOnNext + 1;
 	}
 	for (Person* indexPointer = startIndexPointer; indexPointer != this->currentPointer; ++indexPointer) {
-		if (indexPointer->namn == sökEfter || indexPointer->address == sökEfter) {
+		if (indexPointer->namn == sökEfter || indexPointer->adress == sökEfter) {
 			return indexPointer;
 		}
 	}
@@ -128,5 +128,5 @@ void PersonReg::Print() {
 	}
 };
 void PersonReg::Töm() {
-	this->startPointer = this->currentPointer;
+	this->currentPointer = this->startPointer;
 };

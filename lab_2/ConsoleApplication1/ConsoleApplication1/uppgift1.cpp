@@ -30,30 +30,42 @@ bool isPrimeNbr(int* primesArray, int* primesArraySize, int nbrToCheck) {
 }
 
 void printPrimeNbrs(int n) {
-	int size = n - 2;
-	int* nbrs = new int[size] {};
+	int size = n - 1;
+	int* nbrs = new int[size]();
 	for (int i = 0; i < size; i++) {
-		nbrs[i] = i + 2;
+		nbrs[i] = 2 + i;
 	}
-
-	int* primes = new int[size];
-	for (int i = 0; i < size; i++) {
-		primes[i] = -1;
-	}
-	primes[0] = 2;
-	int primesSize = 1;
-
 
 	for (int i = 0; i < size; i++) {
 		int nbr = nbrs[i];
-		if (nbr == 2) {
-			std::cout << "prime: " << nbr << std::endl;
+		int nbrPowerBy2 = nbr * nbr;
+		bool shouldContinue = nbrPowerBy2 <= n;
+		if (!shouldContinue) {
+			break;
+		}
+		bool isAlreadyComposite = nbr == -1;
+		if (isAlreadyComposite) {
 			continue;
 		}
-		if (isPrimeNbr(primes, &primesSize, nbr)) {
-			std::cout << "prime: " << nbr << std::endl;
+		for (int j = i + 1; j < size; j++) {
+			int compareNbr = nbrs[j];
+			bool isAlreadyComposite = compareNbr == -1;
+			if (isAlreadyComposite) {
+				continue;
+			}
+			bool isComposite = (compareNbr % nbr) == 0;
+			if (isComposite) {
+				nbrs[j] = -1;
+			}
 		}
 	}
+
+	for (int i = 0; i < size; i++) {
+		int nbr = nbrs[i];
+		if (nbr != -1) {
+			std::cout << nbr << std::endl;
+		}
+	}
+
 	delete[] nbrs;
-	delete[] primes;
 }

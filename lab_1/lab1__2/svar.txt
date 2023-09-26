@@ -1,0 +1,8 @@
+Uppgift 1:
+Svar: Det skrevs ut att en exe och obj fil generades, vilket var det som hände.
+
+uppgift 2:
+När man kör länking kommandot "cl /EHsc /c hello.cpp" så genereras det enbart obj fil.
+När man kör enbart kompilerings kommandot separat "link /out:foo.exe hello.obj" så genereras det enbart exe file.
+
+uppgift 3:

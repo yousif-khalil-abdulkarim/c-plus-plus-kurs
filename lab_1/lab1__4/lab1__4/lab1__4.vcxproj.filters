@@ -15,16 +15,20 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="lab3.cpp">
+    <ClCompile Include="polysolver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PersonReg.cpp">
+    <ClCompile Include="poly2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="PersonReg.h">
+    <ClInclude Include="poly2.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="coeffs.txt" />
+    <Text Include="roots.txt" />
   </ItemGroup>
 </Project>

@@ -128,11 +128,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="lab3.cpp" />
     <ClCompile Include="PersonReg.cpp" />
+    <ClCompile Include="PersonRegTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PersonReg.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="PersonExempel.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

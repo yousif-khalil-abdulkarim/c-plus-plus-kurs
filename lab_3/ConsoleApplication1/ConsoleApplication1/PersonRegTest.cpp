@@ -19,22 +19,31 @@
 #define DN(x)
 #define PD(x) (x)
 #endif
+#include <string>
+#include <fstream>
+#include <iostream>
+#include <locale>
+using std::string;
+using std::ifstream;
+using std::cout;
+using std::endl;
+using std::cin;
+using std::locale;
 
 void Init(PersonReg& tr) {
-    tr.T?m();
-    PD(tr.L?ggTillTest("olle", "0703955123"));
-    PD(tr.L?ggTillTest("olle", "123"));
-    PD(tr.L?ggTillTest("kurt?ke", "12345"));
-    PD(tr.L?ggTillTest("olle", "456"));
-    PD(tr.L?ggTillTest("sven", "456"));
-    PD(tr.L?ggTillTest("kurt", "95815"));
+    tr.Töm();
+    PD(tr.LäggTillTest("olle", "0703955123"));
+    PD(tr.LäggTillTest("olle", "123"));
+    PD(tr.LäggTillTest("kurtåke", "12345"));
+    PD(tr.LäggTillTest("olle", "456"));
+    PD(tr.LäggTillTest("sven", "456"));
+    PD(tr.LäggTillTest("kurt", "95815"));
     PN(endl);
     PN(("fullt reg "));
     PN((endl));
     DN((tr.Print()));
 }
 
-#include <fstream>
 bool ReadReg(PersonReg& reg, string fileName) {
     string line;
     ifstream myfile(fileName);
@@ -43,12 +52,12 @@ bool ReadReg(PersonReg& reg, string fileName) {
     {
         while (getline(myfile, line))
         {
-            while (line.length() == 0 && getline(myfile, line))
-                ;
+            while (line.length() == 0 && getline(myfile, line));
             string name(line);
             string adress;
             getline(myfile, adress);
-            reg.L?ggTill(&Person(name, adress));
+            Person person = Person(name, adress);
+            reg.LäggTill(&person);
         }
         myfile.close();
         return true;
@@ -63,7 +72,7 @@ void Test1() {
     PersonReg reg(10);
     ReadReg(reg, "PersonExempel.txt");
     reg.Print(); cout << "\n\n";
-    reg.T?m();
+    reg.Töm();
     reg.Print();
 }
 
@@ -71,9 +80,9 @@ void Test2() {
     PersonReg reg(10);
     Init(reg);
     string namn, adress;
-    Person te, * tep;
+    Person te, *tep;
 
-    tep = reg.S?kNamn("olle");
+    tep = reg.SökNamn("olle");
     if (tep) {
         cout << tep->adress << endl;
         reg.TaBortEntry(tep);
@@ -81,7 +90,7 @@ void Test2() {
     else
         cout << "not found \n";
 
-    tep = reg.S?kNamn("olle");
+    tep = reg.SökNamn("olle");
     if (tep) {
         cout << tep->adress << endl;
         reg.TaBortEntry(tep);
@@ -89,7 +98,7 @@ void Test2() {
     else
         cout << "not found \n";
 
-    tep = reg.S?kNamn("olle");
+    tep = reg.SökNamn("olle");
     if (tep) {
         cout << tep->adress << endl;
         reg.TaBortEntry(tep);
@@ -97,7 +106,7 @@ void Test2() {
     else
         cout << "not found \n";
 
-    tep = reg.S?kNamn("olle");
+    tep = reg.SökNamn("olle");
     if (tep) {
         cout << tep->adress << endl;
         reg.TaBortEntry(tep);
@@ -105,7 +114,7 @@ void Test2() {
     else
         cout << "not found \n";
 
-    tep = reg.S?kNamn("olle");
+    tep = reg.SökNamn("olle");
     if (tep) {
         cout << tep->adress << endl;
         reg.TaBortEntry(tep);
@@ -115,7 +124,7 @@ void Test2() {
 
     reg.Print();
 
-    reg.T?m();
+    reg.Töm();
     reg.Print();
 }
 
@@ -125,26 +134,26 @@ void Test3() {
     Init(reg);
     reg.Print();
     string namn, adress;
-    Person te, * tep;
+    Person te, *tep;
 
     tep = nullptr;
-    while (tep = reg.S?kFritt("olle", tep)) {
+    while (tep = reg.SökFritt("olle", tep)) {
         tep->Print();
         //        cout << tep->adress << endl;
     }
     cout << "not found \n";
 
-    cout << "blandade s?kningar \n";
-    Person* ptr1 = nullptr, * ptr2 = nullptr;
+    cout << "blandade sökningar \n";
+    Person* ptr1 = nullptr, *ptr2 = nullptr;
     bool first = true;
     while (first || ptr1 || ptr2) {
         if (ptr1 || first) {
-            ptr1 = reg.S?kFritt("olle", ptr1);
+            ptr1 = reg.SökFritt("olle", ptr1);
             if (ptr1)
                 ptr1->Print();
         }
         if (ptr2 || first) {
-            ptr2 = reg.S?kFritt("581", ptr2);
+            ptr2 = reg.SökFritt("581", ptr2);
             if (ptr2)
                 ptr2->Print();
         }
@@ -161,4 +170,5 @@ int main() {
     Test2();
     Test3();
     cin.get();
+    return 0;
 }

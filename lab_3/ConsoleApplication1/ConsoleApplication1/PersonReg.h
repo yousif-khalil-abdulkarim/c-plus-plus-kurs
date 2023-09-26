@@ -6,9 +6,9 @@
 class Person {
 public:
 	std::string namn;
-	std::string address;
+	std::string adress;
 	Person();
-	Person(std::string namn, std::string address);
+	Person(std::string namn, std::string adress);
 	virtual void Print();
 };
 
@@ -16,7 +16,7 @@ class PersonMedTel : public Person {
 public:
 	std::string nummer;
 	PersonMedTel();
-	PersonMedTel(std::string namn, std::string address, std::string nummer);
+	PersonMedTel(std::string namn, std::string adress, std::string nummer);
 	void Print() override;
 };
 
@@ -27,7 +27,7 @@ class PersonReg {
 private:
 	int Capacity() const;
 	int Size() const;
-	bool HasPointer(Person* person) const;
+	bool HasPerson(Person* person) const;
 	bool IsFull() const;
 	bool IsEmpty() const;
 public:
